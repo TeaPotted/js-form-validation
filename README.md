@@ -1,2 +1,3 @@
-# webpack-template
-template for webpack
+# js-form-validation
+
+Form validation with Javascript
