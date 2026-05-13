@@ -3,8 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>JavaScript Form Validation</title>
 </head>
 <body>
+  <form novalidate>
+    <div class="input-container">
+      <label for="mail">Email</label>
+      <input required type="email" name="mail" id="mail">
+    </div>
+    <div class="input-container">
+      <label for="country">Country</label>
+      <select id="country" name="country">
+        <option value="ch">Switzerland</option>
+        <option value="fr">France</option>
+        <option value="de">Germany</option>
+        <option value="nl">The Netherlands</option>
+      </select>
+    </div>
+    <div class="input-container">
+      <label for="postal-code">Postal Code</label>
+      <input required type="text" name="postal-code" id="postal-code">
+    </div>
+    <div class="input-container">
+      <label for="password">Password</label>
+      <input required type="password" name="password" id="password">
+    </div>
+    <div class="input-container">
+      <label for="password-confirmation">Password Confirmation</label>
+      <input required type="password" name="password-confirmation" id="password-confirmation">
+    </div>
+    <button id="submitButton">Done</button>
+  </form>
 </body>
 </html>
