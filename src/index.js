@@ -7,3 +7,7 @@ const postalCode = document.getElementById("postal-code");
 const password = document.getElementById("password");
 const passwordConfirm = document.getElementById("password-confirmation");
 const form = document.querySelector("form");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault(); // prevent the form from submitting
+});
