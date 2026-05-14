@@ -70,16 +70,34 @@ function checkPostalCode() {
   };
 };
 
+// function for checking validity of password
+function checkPassword() {
+  switch (true) {
+    case password.validity.valueMissing:
+      password.setCustomValidity("The password field needs to be filled!");
+      password.reportValidity();
+      break;
+
+    default:
+      password.setCustomValidity("");
+      break;
+  };
+}
+
 // check email when there is an input
 email.addEventListener("input", (e) => checkEmail());
 
 // check postalCode when there is an input
 postalCode.addEventListener("input", checkPostalCode)
 
+// check password when there is an input
+password.addEventListener("input", (e) => checkPassword());
+
 // when form is submitted, check all the inputs
 form.addEventListener("submit", (e) => {
   e.preventDefault(); // prevent the form from submitting
   
+  checkPassword();
   checkPostalCode();
   checkEmail();
 });
