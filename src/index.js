@@ -30,12 +30,56 @@ function checkEmail() {
   };
 };
 
+// function for checking validity of postal code
+function checkPostalCode() {
+  // For each country, define the pattern that the postal code has to follow
+  const constraints = {
+    ch: [
+      "^(CH-)?\\d{4}$",
+      "Swiss postal codes must have exactly 4 digits: e.g. CH-1950 or 1950",
+    ],
+    fr: [
+      "^(F-)?\\d{5}$",
+      "French postal codes must have exactly 5 digits: e.g. F-75012 or 75012",
+    ],
+    de: [
+      "^(D-)?\\d{5}$",
+      "German postal codes must have exactly 5 digits: e.g. D-12345 or 12345",
+    ],
+    nl: [
+      "^(NL-)?\\d{4}\\s*([A-RT-Z][A-Z]|S[BCE-RT-Z])$",
+      "Dutch postal codes must have exactly 4 digits, followed by 2 letters except SA, SD and SS",
+    ],
+  };
+
+  // read the country id
+  const countryVal = country.value;
+
+  // build the constraint checker
+  const constraint = new RegExp(constraints[countryVal][0], "");
+
+  // check it!
+  if (constraint.test(postalCode.value)) {
+    // the postal code follows the constraint, we use the ConstraintAPI to tell it
+    postalCode.setCustomValidity("");
+  } else {
+    // the postal code does'nt follow the constraint, we use the ConstraintAPI to 
+    // give a message about the format required for this country
+    postalCode.setCustomValidity(constraints[countryVal][1]);
+    postalCode.reportValidity();
+  };
+};
+
 // check email when there is an input
 email.addEventListener("input", (e) => checkEmail());
+
+// check postalCode when there is an input
+postalCode.addEventListener("input", checkPostalCode)
 
 // when form is submitted, check all the inputs
 form.addEventListener("submit", (e) => {
   e.preventDefault(); // prevent the form from submitting
   
+  checkPostalCode();
   checkEmail();
 });
