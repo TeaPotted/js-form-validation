@@ -84,6 +84,27 @@ function checkPassword() {
   };
 }
 
+// function for checking validity of password confirmation
+function checkPasswordConfirmation() {
+  switch (true) {
+    // if passwordConfirm is empty
+    case passwordConfirm.validity.valueMissing:
+      passwordConfirm.setCustomValidity("Please confirm your password!");
+      passwordConfirm.reportValidity();
+      break;
+    
+    // if passwordConfirm does not match password
+    case !passwordConfirm.validity.valueMissing && passwordConfirm.value !== password.value:
+      passwordConfirm.setCustomValidity("Input does not match password!");
+      passwordConfirm.reportValidity();
+      break;
+
+    default:
+      passwordConfirm.setCustomValidity("");
+      break;
+  };
+};
+
 // check email when there is an input
 email.addEventListener("input", (e) => checkEmail());
 
@@ -93,10 +114,14 @@ postalCode.addEventListener("input", checkPostalCode)
 // check password when there is an input
 password.addEventListener("input", (e) => checkPassword());
 
+// check password confirmation when there is an input
+passwordConfirm.addEventListener("input", (e) => checkPasswordConfirmation());
+
 // when form is submitted, check all the inputs
 form.addEventListener("submit", (e) => {
   e.preventDefault(); // prevent the form from submitting
   
+  checkPasswordConfirmation();
   checkPassword();
   checkPostalCode();
   checkEmail();
